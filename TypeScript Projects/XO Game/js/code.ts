@@ -296,7 +296,6 @@ class TicTacToeGame {
   }
 
   public newGame(): void {
-    this.stats = { X: 0, O: 0, draws: 0 };
     this.resetGame();
   }
 }

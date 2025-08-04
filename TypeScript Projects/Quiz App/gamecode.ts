@@ -42,10 +42,10 @@ class QuizUI {
     this.caption = this.getElement<HTMLElement>("#caption");
     // Updated selectors to match new HTML structure
     this.answers = [
-      this.getElement<HTMLElement>(".a1 .mytext"),
-      this.getElement<HTMLElement>(".a2 .mytext"),
-      this.getElement<HTMLElement>(".a3 .mytext"),
-      this.getElement<HTMLElement>(".a4 .mytext")
+      this.getElement<HTMLElement>(".a1 h3.mytext"),
+      this.getElement<HTMLElement>(".a2 h3.mytext"),
+      this.getElement<HTMLElement>(".a3 h3.mytext"),
+      this.getElement<HTMLElement>(".a4 h3.mytext")
     ];
     this.counter = this.getElement<HTMLElement>("#counterplace");
     this.nextBtn = this.getElement<HTMLButtonElement>("#nextquestion");
