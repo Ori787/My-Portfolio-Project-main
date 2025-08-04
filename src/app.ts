@@ -120,7 +120,75 @@ export class App {
   }
 }
 
+// Carousel functionality
+class Carousel {
+  private carousel: HTMLElement;
+  private prevButton: HTMLElement;
+  private nextButton: HTMLElement;
+  private dots: NodeListOf<Element>;
+  private currentSlide: number = 0;
+  private totalSlides: number;
+
+  constructor(carouselId: string, prevId: string, nextId: string, dotsClass: string) {
+    this.carousel = document.getElementById(carouselId) as HTMLElement;
+    this.prevButton = document.getElementById(prevId) as HTMLElement;
+    this.nextButton = document.getElementById(nextId) as HTMLElement;
+    this.dots = document.querySelectorAll(dotsClass);
+    this.totalSlides = this.dots.length;
+
+    this.initializeCarousel();
+  }
+
+  private initializeCarousel(): void {
+    this.prevButton.addEventListener("click", () => this.prevSlide());
+    this.nextButton.addEventListener("click", () => this.nextSlide());
+    
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => this.goToSlide(index));
+    });
+
+    this.updateCarousel();
+  }
+
+  private prevSlide(): void {
+    this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+    this.updateCarousel();
+  }
+
+  private nextSlide(): void {
+    this.currentSlide = this.currentSlide === this.totalSlides - 1 ? 0 : this.currentSlide + 1;
+    this.updateCarousel();
+  }
+
+  private goToSlide(slideIndex: number): void {
+    this.currentSlide = slideIndex;
+    this.updateCarousel();
+  }
+
+  private updateCarousel(): void {
+    const slideWidth = 100 / 3; // Show 3 slides at once on desktop
+    const translateX = -this.currentSlide * slideWidth;
+    
+    this.carousel.style.transform = `translateX(${translateX}%)`;
+    
+    // Update dots
+    this.dots.forEach((dot, index) => {
+      if (index === this.currentSlide) {
+        dot.classList.add("bg-white");
+        dot.classList.remove("bg-white/30");
+      } else {
+        dot.classList.remove("bg-white");
+        dot.classList.add("bg-white/30");
+      }
+    });
+  }
+}
+
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   new App();
+  
+  // Initialize carousels
+  new Carousel("landing-carousel", "landing-prev", "landing-next", ".landing-dot");
+  new Carousel("typescript-carousel", "typescript-prev", "typescript-next", ".typescript-dot");
 });

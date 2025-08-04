@@ -93,8 +93,59 @@ export class App {
         });
     }
 }
+// Carousel functionality
+class Carousel {
+    constructor(carouselId, prevId, nextId, dotsClass) {
+        this.currentSlide = 0;
+        this.carousel = document.getElementById(carouselId);
+        this.prevButton = document.getElementById(prevId);
+        this.nextButton = document.getElementById(nextId);
+        this.dots = document.querySelectorAll(dotsClass);
+        this.totalSlides = this.dots.length;
+        this.initializeCarousel();
+    }
+    initializeCarousel() {
+        this.prevButton.addEventListener("click", () => this.prevSlide());
+        this.nextButton.addEventListener("click", () => this.nextSlide());
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => this.goToSlide(index));
+        });
+        this.updateCarousel();
+    }
+    prevSlide() {
+        this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+        this.updateCarousel();
+    }
+    nextSlide() {
+        this.currentSlide = this.currentSlide === this.totalSlides - 1 ? 0 : this.currentSlide + 1;
+        this.updateCarousel();
+    }
+    goToSlide(slideIndex) {
+        this.currentSlide = slideIndex;
+        this.updateCarousel();
+    }
+    updateCarousel() {
+        const slideWidth = 100 / 3; // Show 3 slides at once on desktop
+        const translateX = -this.currentSlide * slideWidth;
+        this.carousel.style.transform = `translateX(${translateX}%)`;
+        // Update dots
+        this.dots.forEach((dot, index) => {
+            if (index === this.currentSlide) {
+                dot.classList.add("bg-white");
+                dot.classList.remove("bg-white/30");
+            }
+            else {
+                dot.classList.remove("bg-white");
+                dot.classList.add("bg-white/30");
+            }
+        });
+    }
+}
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     new App();
+    // Initialize carousels
+    new Carousel("landing-carousel", "landing-prev", "landing-next", ".landing-dot");
+    new Carousel("typescript-carousel", "typescript-prev", "typescript-next", ".typescript-dot");
 });
 //# sourceMappingURL=app.js.map

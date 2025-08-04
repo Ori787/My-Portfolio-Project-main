@@ -40,9 +40,13 @@ class QuizUI {
 
   constructor() {
     this.caption = this.getElement<HTMLElement>("#caption");
-    this.answers = [1, 2, 3, 4, 5].map(i =>
-      this.getElement<HTMLElement>(`.a${i} .mytext`)
-    );
+    // Updated selectors to match new HTML structure
+    this.answers = [
+      this.getElement<HTMLElement>(".a1 .mytext"),
+      this.getElement<HTMLElement>(".a2 .mytext"),
+      this.getElement<HTMLElement>(".a3 .mytext"),
+      this.getElement<HTMLElement>(".a4 .mytext")
+    ];
     this.counter = this.getElement<HTMLElement>("#counterplace");
     this.nextBtn = this.getElement<HTMLButtonElement>("#nextquestion");
     this.playground = this.getElement<HTMLElement>("#playground");
@@ -62,7 +66,7 @@ class QuizUI {
     this.answers[1].innerHTML = q.a2;
     this.answers[2].innerHTML = q.a3;
     this.answers[3].innerHTML = q.a4;
-    this.answers[4].innerHTML = q.a5;
+    // Note: We only have 4 answer options in the new HTML, so we'll skip a5
   }
 
   setCounter(current: number, total: number) {
@@ -70,17 +74,48 @@ class QuizUI {
   }
 
   showScore(score: number, total: number) {
-    alert(`You Scored: ${score}/${total}!`);
+    // Create a modern modal instead of alert
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50';
+    modal.innerHTML = `
+      <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl border border-white/20">
+        <div class="text-center">
+          <h2 class="text-3xl font-bold mb-6 text-white">Quiz Complete!</h2>
+          <p class="text-2xl font-bold mb-6 text-white">You Scored: ${score}/${total}</p>
+          <button class="bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/30" onclick="this.closest('.fixed').remove()">
+            Close
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
   }
 
   disableAnswerButtons() {
     const buttons = Array.from(this.playground.querySelectorAll<HTMLButtonElement>(".mybtn"));
-    buttons.forEach(b => (b.disabled = true));
+    buttons.forEach(b => {
+      b.disabled = true;
+      b.classList.add('opacity-50', 'cursor-not-allowed');
+    });
   }
 
   enableAnswerButtons() {
     const buttons = Array.from(this.playground.querySelectorAll<HTMLButtonElement>(".mybtn"));
-    buttons.forEach(b => (b.disabled = false));
+    buttons.forEach(b => {
+      b.disabled = false;
+      b.classList.remove('opacity-50', 'cursor-not-allowed');
+    });
+  }
+
+  showCorrectAnswer(selectedButton: HTMLButtonElement, isCorrect: boolean) {
+    // Add visual feedback
+    if (isCorrect) {
+      selectedButton.classList.add('bg-green-500', 'border-green-400');
+      selectedButton.classList.remove('bg-white/20', 'border-white/30');
+    } else {
+      selectedButton.classList.add('bg-red-500', 'border-red-400');
+      selectedButton.classList.remove('bg-white/20', 'border-white/30');
+    }
   }
 }
 
@@ -103,18 +138,19 @@ class QuizController {
     const buttons = Array.from(
       this.ui.playground.querySelectorAll<HTMLButtonElement>(".mybtn")
     );
-    buttons.forEach(btn => {
+    buttons.forEach((btn, index) => {
       btn.addEventListener("click", () => {
         const myText = btn.parentElement?.querySelector(".mytext") as HTMLElement | null;
         if (!myText) return;
         const selectedAnswer = myText.textContent;
         const correctAnswer = questionArr[this.currentQuestionIndex].rightAnswer;
-        if (selectedAnswer === correctAnswer) {
-          alert("You're Right!");
+        const isCorrect = selectedAnswer === correctAnswer;
+        
+        if (isCorrect) {
           correctAnswersCounter++;
-        } else {
-          alert("You're False!");
         }
+        
+        this.ui.showCorrectAnswer(btn, isCorrect);
         this.ui.disableAnswerButtons();
       });
     });
@@ -127,6 +163,13 @@ class QuizController {
         this.ui.setQuestion(this.currentQuestionIndex);
         this.ui.setCounter(this.currentQuestionIndex + 1, this.totalQuestions);
         this.ui.enableAnswerButtons();
+        
+        // Reset button styles
+        const buttons = Array.from(this.ui.playground.querySelectorAll<HTMLButtonElement>(".mybtn"));
+        buttons.forEach(btn => {
+          btn.classList.remove('bg-green-500', 'border-green-400', 'bg-red-500', 'border-red-400');
+          btn.classList.add('bg-white/20', 'border-white/30');
+        });
       } else {
         this.ui.showScore(correctAnswersCounter, this.totalQuestions);
       }
@@ -145,6 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ui = new QuizUI();
     new QuizController(ui);
   } catch (err) {
+    console.error("Quiz failed to load:", err);
     alert("Quiz failed to load: " + err);
   }
 });

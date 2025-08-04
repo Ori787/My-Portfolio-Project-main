@@ -83,7 +83,7 @@ class TicTacToeGame {
   }
 
   private setupEventListeners(): void {
-    const cells = document.querySelectorAll(".game-cell");
+    const cells = document.querySelectorAll("[data-index]");
     const resetBtn = document.querySelector(".reset-btn") as HTMLButtonElement;
     const newGameBtn = document.querySelector(
       ".new-game-btn"
@@ -96,7 +96,8 @@ class TicTacToeGame {
     ) as HTMLButtonElement;
 
     // Game board cells
-    cells.forEach((cell, index) => {
+    cells.forEach((cell) => {
+      const index = parseInt(cell.getAttribute("data-index") || "0");
       cell.addEventListener("click", () => this.handleCellClick(index));
       cell.addEventListener("keydown", (e) => {
         const keyboardEvent = e as KeyboardEvent;

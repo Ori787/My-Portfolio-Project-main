@@ -52,13 +52,14 @@ class TicTacToeGame {
         this.updateStats();
     }
     setupEventListeners() {
-        const cells = document.querySelectorAll(".game-cell");
+        const cells = document.querySelectorAll("[data-index]");
         const resetBtn = document.querySelector(".reset-btn");
         const newGameBtn = document.querySelector(".new-game-btn");
         const playAgainBtn = document.querySelector(".play-again-btn");
         const newGameModalBtn = document.querySelector(".new-game-modal-btn");
         // Game board cells
-        cells.forEach((cell, index) => {
+        cells.forEach((cell) => {
+            const index = parseInt(cell.getAttribute("data-index") || "0");
             cell.addEventListener("click", () => this.handleCellClick(index));
             cell.addEventListener("keydown", (e) => {
                 const keyboardEvent = e;
