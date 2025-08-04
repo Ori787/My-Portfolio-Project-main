@@ -102,13 +102,6 @@ class Carousel {
         this.nextButton = document.getElementById(nextId);
         this.dots = document.querySelectorAll(dotsClass);
         this.totalSlides = this.dots.length;
-        // Debug logging
-        console.log(`Initializing carousel: ${carouselId}`);
-        console.log("Carousel element:", this.carousel);
-        console.log("Prev button:", this.prevButton);
-        console.log("Next button:", this.nextButton);
-        console.log("Dots found:", this.dots.length);
-        console.log("Total slides:", this.totalSlides);
         if (!this.carousel || !this.prevButton || !this.nextButton) {
             console.error(`Failed to initialize carousel ${carouselId}: Missing elements`);
             return;
@@ -116,21 +109,16 @@ class Carousel {
         this.initializeCarousel();
     }
     initializeCarousel() {
-        console.log("Setting up event listeners for carousel");
-        this.prevButton.addEventListener("click", () => {
-            console.log("Prev button clicked");
+        this.prevButton.addEventListener("click", (e) => {
+            e.preventDefault();
             this.prevSlide();
         });
-        this.nextButton.addEventListener("click", () => {
-            console.log("Next button clicked");
+        this.nextButton.addEventListener("click", (e) => {
+            e.preventDefault();
             this.nextSlide();
         });
         this.dots.forEach((dot, index) => {
             dot.addEventListener("click", () => this.goToSlide(index));
-        });
-        // Handle window resize
-        window.addEventListener("resize", () => {
-            this.updateCarousel();
         });
         this.updateCarousel();
     }
@@ -149,23 +137,9 @@ class Carousel {
         this.updateCarousel();
     }
     updateCarousel() {
-        // Get the actual width of a slide element
-        const slides = this.carousel.children;
-        if (slides.length === 0)
-            return;
-        const firstSlide = slides[0];
-        const slideWidth = firstSlide.offsetWidth;
+        // Fixed slide width: w-80 (320px) + px-4 (16px * 2) = 352px
+        const slideWidth = 352;
         const translateX = -this.currentSlide * slideWidth;
-        console.log("Updating carousel:", {
-            currentSlide: this.currentSlide,
-            slideWidth,
-            translateX,
-            totalSlides: this.totalSlides,
-            carouselWidth: this.carousel.offsetWidth,
-            firstSlideWidth: firstSlide.offsetWidth
-        });
-        // Force a reflow to ensure accurate width calculation
-        this.carousel.offsetHeight;
         this.carousel.style.transform = `translateX(${translateX}px)`;
         // Update dots
         this.dots.forEach((dot, index) => {
@@ -182,10 +156,7 @@ class Carousel {
 }
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM loaded, initializing app...");
     new App();
-    // Initialize carousels
-    console.log("Initializing carousels...");
     new Carousel("landing-carousel", "landing-prev", "landing-next", ".landing-dot");
     new Carousel("typescript-carousel", "typescript-prev", "typescript-next", ".typescript-dot");
 });
