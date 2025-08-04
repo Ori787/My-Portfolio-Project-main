@@ -218,6 +218,9 @@ class Carousel {
       firstSlideWidth: firstSlide.offsetWidth
     });
 
+    // Force a reflow to ensure accurate width calculation
+    this.carousel.offsetHeight;
+    
     this.carousel.style.transform = `translateX(${translateX}px)`;
 
     // Update dots

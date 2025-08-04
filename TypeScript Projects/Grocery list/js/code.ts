@@ -27,18 +27,6 @@ const loadSavedList = (): void => {
   }
 };
 
-const addToArray = (): void => {
-  if (!addBtn || !myInput) return;
-  addBtn.addEventListener("click", () => {
-    const inputValue = myInput.value.trim();
-    if (inputValue !== "") {
-      listArr.push(inputValue);
-      myInput.value = ""; // Clear input after adding
-      console.log(listArr);
-    }
-  });
-};
-
 const addToList = (): void => {
   if (!addBtn || !myInput || !container) return;
   addBtn.addEventListener("click", () => {
@@ -94,11 +82,6 @@ const showFavList = (): void => {
     container.style.display = "none";
     question.style.display = "none";
   });
-
-  // Add click handler to switch back to main list
-  addBtn?.addEventListener("click", () => {
-    showMainList();
-  });
 };
 
 const showMainList = (): void => {
@@ -109,11 +92,18 @@ const showMainList = (): void => {
   question.style.display = "block";
 };
 
+const setupMainListSwitch = (): void => {
+  if (!addBtn) return;
+  addBtn.addEventListener("click", () => {
+    showMainList();
+  });
+};
+
 // Initialize when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   loadSavedList();
   addToList();
   appendInFavDiv();
   showFavList();
-  showMainList();
+  setupMainListSwitch();
 });
