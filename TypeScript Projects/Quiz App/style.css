@@ -1,0 +1,84 @@
+body h1 {
+  font-family: Russo One;
+  margin-left: 36.5vw;
+  position: relative;
+}
+
+#playground {
+  width: 80vw;
+  height: 70vh;
+  background-color: #000;
+  margin-left: 10vw;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: rgb(39, 84, 190);
+}
+
+#playagainbtn img {
+  width: 10vw;
+  border-radius: 50px;
+}
+
+#playagainbtn {
+  position: absolute;
+  margin-top: -18vh;
+  margin-left: 42.5vw;
+  border-radius: 50px;
+}
+
+#playground p {
+  color: white;
+  margin-left: 34.8vw;
+  margin-top: 47.5vh;
+  position: absolute;
+  font-family: Russo One;
+}
+
+#playground div {
+  background-color: #ccc;
+  border-radius: 15px;
+  margin-top: 1vh;
+  height: 5vh;
+  margin-right: 7vw;
+  margin-left: 7vw;
+}
+
+#playground div button {
+  border-radius: 30px;
+  height: 2.5vh;
+  background-color: rgba(2, 255, 32, 0.789);
+  border-color: white;
+  margin-top: 1vh;
+  margin-left: 0.7vw;
+}
+
+body #playground h1 {
+  margin-left: 31vw;
+  width: 20vw;
+  font-size: 1.5rem;
+}
+
+.mytext {
+  margin-top: -3vh;
+  position: absolute;
+  margin-left: 3vw;
+}
+
+#nextquestion {
+  width: 5vw;
+  height: 6vh;
+  margin-left: 68vw;
+  margin-top: 19.5vh;
+  border-radius: 10px;
+}
+
+#playground h2 {
+  margin-top: 58vh;
+  margin-left: 69vw;
+  color: white;
+  position: absolute;
+  font-size: 1em;
+}

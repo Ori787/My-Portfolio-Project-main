@@ -1,0 +1,588 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.headingg p {
+  font-family: "Pacifico", cursive;
+  font-size: 72px;
+  background: -webkit-linear-gradient(#157cb3, #061fc2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro h1 {
+  margin-top: 3vw;
+  position: absolute;
+}
+
+.intro img {
+  width: 7vw;
+  height: 7vh;
+  margin-top: -18vh;
+  position: static;
+}
+
+body nav div a {
+  display: flex;
+  margin-left: 6vw;
+  line-height: 2.5;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+body nav div p {
+  font-size: 1.5em;
+  font-family: Satisfy;
+  margin-left: 3vw;
+}
+
+/* טקסט פרופיל */
+.navbar-profile-name {
+  font-family: 'Satisfy', cursive;
+  font-size: 1.5rem;
+  color: #fff;          /* לבן */
+  font-weight: 600;
+  user-select: none;
+}
+
+.navbar-profile-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.navbar-brand img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* עיגול מלא */
+  object-fit: cover;
+  border: 2px solid #fff; /* מסגרת לבנה יפה (אופציונלי) */
+}
+
+/* לינקים */
+.nav-link {
+  font-size: 1.1rem;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #0dcaf0;
+}
+
+/* כפתור הטוגל למובייל */
+.navbar-toggler {
+  border: none;
+  box-shadow: none;
+  margin-left: auto;
+  margin-right: 1rem; 
+}
+
+/* הוספת מעט ריווח לצד ימין ושמאל */
+.navbar .container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.headingg {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(42, 43, 57);
+}
+
+body h1 div p {
+  margin-top: 20vh;
+  font-family: heebo;
+}
+
+.iconbar {
+  height: 12vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.intro {
+  width: 100vw;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 14vh;
+}
+
+article .sub-intro {
+  width: 60%;
+  font-size: 1.2rem;
+  margin: 2rem auto;
+  line-height: 1.6;
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.sub-intro.visible {
+  opacity: 1;
+}
+
+.text {
+  font-family: monospace;
+  overflow: hidden;
+  white-space: pre-wrap;
+  animation: 
+    typing 1.5s steps(100, end),
+    cursor .4s step-end infinite alternate;
+  border-right: 5px solid;
+  letter-spacing: 3px;
+  width: 100%;
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+body article img {
+  border-radius: 45%;
+  width: 1vw;
+  height: 15vh;
+  position: absolute;
+  margin-bottom: 4vh;
+}
+
+body {
+  background-color: rgb(42, 43, 57);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  width: 100vw;
+  height: 7vh;
+  border: 2px inset rgb(0, 0, 0, 0.4);
+  position: fixed;
+  line-height: 2.3;
+  margin-left: 3.6vw;
+}
+
+body article div h1 {
+  margin-top: 14vh;
+  font-weight: bold;
+  font-size: 2.85em;
+}
+
+body article div h2 {
+  font-weight: 100;
+  font-size: 1.5em;
+}
+
+.profilepic {
+  border-radius: 50%;
+  margin-left: 10vw;
+  grid-row: 1/1;
+  grid-column: 1/2;
+}
+
+.name {
+  grid-row: 1/1;
+  grid-column: 2/3;
+}
+
+.main {
+  grid-row: 1/1;
+  grid-column: 3/4;
+}
+
+.about {
+  grid-row: 1/1;
+  grid-column: 4/5;
+  align-content: center;
+}
+
+.gallery {
+  grid-row: 1/1;
+  grid-column: 5/6;
+  align-content: center;
+}
+
+.contactme {
+  grid-row: 1/1;
+  grid-column: 6/7;
+  text-align: center;
+}
+
+.cvbutton {
+  height: 20vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.cvbutton button {
+  font-size: 10pt;
+  width: 25vw;
+  height: 8vh;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.9;
+  border-radius: 25px;
+}
+
+.cvbutton button a {
+  font-size: 1.45em;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+}
+
+/* --- כאן התחילו השינויים --- */
+.cardcontainer1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 3vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.js-cardcontainer1,
+.js-cardcontainer2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 5vw;
+  margin-bottom: 3vh;
+}
+
+.cardcontainer1 p,
+.js-cardcontainer1 p {
+  font-size: 0.7rem;
+}
+
+.cardcontainer2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 3vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.cardcontainer2 p,
+.js-cardcontainer2 p {
+  font-size: 0.7rem;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 20vh;
+}
+
+section h1 {
+  margin-top: 1vh;
+  font-family: "Heebo", sans-serif;
+  font-weight: bold;
+  justify-content: center;
+}
+
+body nav div img {
+  width: 4vw;
+  height: 6vh;
+  border-radius: 50%;
+  margin-top: 0.3vh;
+}
+
+.js-cardcontainer1 .card,
+.js-cardcontainer2 .card {
+  width: 140px;
+  height: auto;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.js-cardcontainer1 .card:hover,
+.js-cardcontainer2 .card:hover {
+  transform: translateY(-5px);
+}
+
+.js-cardcontainer1 .card button,
+.js-cardcontainer2 .card button {
+  width: 70%;
+  margin-bottom: 15px;
+}
+
+.js-cardcontainer1 .card img {
+  width: 100%;
+}
+
+.card {
+  width: 30vw;
+  height: auto;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  overflow: hidden;
+  white-space: nowrap;
+  resize: none;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #1ae0ec;
+  text-align: center;
+  cursor: pointer;
+  width: 65%;
+  font-size: 1rem;
+  border-radius: 15px;
+  margin-bottom: 4vh;
+  opacity: 0.4;
+}
+
+.cardcontainer1 div h1,
+.cardcontainer2 div h1 {
+  font-size: 2rem;
+}
+
+.mailbox {
+  position: relative;
+  width: 100vw;
+  height: 70vh;
+  background-color: #000000;
+  margin-top: 30vh;
+}
+
+.mailbox img {
+  position: absolute;
+  width: 38vw;
+  height: 50vh;
+  margin-left: 5vw;
+}
+
+.mailbox form {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  direction: rtl;
+  margin-left: 55vw;
+  margin-top: 20vh;
+  position: absolute;
+}
+
+form label {
+  color: #ffffff;
+  font-family: Heebo;
+}
+
+.mailbox button {
+  width: 10vw;
+  height: 4vh;
+  position: absolute;
+  margin-top: 55vh;
+  margin-left: 74.9vw;
+  background-color: #1ae0ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+}
+
+form input {
+  border-bottom: 3px solid #1ae0ec;
+}
+
+.headingg p {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.copyright {
+  width: 100vw;
+  height: 4vh;
+  background-color: black;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ======= שדרוג bottom bar ======= */
+.bottombar {
+  width: 100%;
+  height: 5vh;
+  background-color: #2a2b39;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid #444;
+}
+
+.bottombar .imgss img {
+  width: 6vw;
+  height: 6vw;
+  min-width: 35px;
+  min-height: 35px;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: transform 0.2s ease;
+  filter: brightness(0) invert(1);
+}
+
+.bottombar .imgss img:hover {
+  transform: scale(1.2);
+  filter: brightness(1.3);
+}
+
+.bottombar .subtitle {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+  margin-left: 0.1vw;
+  margin-right: 0.1vw;
+}
+
+/* ======= MEDIA QUERY ======= */
+@media only screen and (max-width: 768px) {
+  article .sub-intro {
+    width: 85%;
+    font-size: 0.8rem;
+    margin-left: 3vw;
+  }
+
+  .cvbutton button {
+    width: 65vw;
+    font-size: 0.8rem;
+  }
+
+  .cardcontainer1,
+  .cardcontainer2 {
+    flex-direction: column;
+  }
+
+  .cardcontainer1 div,
+  .cardcontainer2 div {
+    width: 100vw;
+    border-radius: 10%;
+    margin-top: 5vh;
+    margin-left: -10vw;
+  }
+
+  section h1 {
+    margin-left: 15vw;
+  }
+
+  .mailbox {
+    width: 100vw;
+  }
+
+  .mailbox button {
+    width: 20vw;
+    margin-left: 65vw;
+  }
+
+  .bottombar {
+    height: 10vh;
+    flex-direction: row;
+  }
+
+  .bottombar .imgss {
+    gap: 6vw;
+    flex-wrap: wrap;
+  }
+
+  .bottombar .imgss img {
+    width: 8vw;
+    height: 8vw;
+  }
+
+  .bottombar .subtitle {
+    font-size: 0.8rem;
+    margin-top: 1vh;
+  }
+
+  .js-cardcontainer1,
+  .js-cardcontainer2 {
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 2vw;
+  }
+
+  .js-cardcontainer1 .card,
+  .js-cardcontainer2 .card {
+    width: 65vw;
+  }
+}
+
+.whatsapp img {
+  width: 2vw;
+  margin-left: 0.5vw;
+}
+
+.phone img {
+  margin-left: -0.5vw;
+}
+
+.js-projects {
+  width: 100vw;
+  height: 80vh;
+  background-color: black;
+}
+
+.js-caption {
+  display: flex;
+  justify-content: center;
+  margin-top: 15vh;
+  margin-bottom: 15vh;
+}
+
+.js-cardcontainer1 div,
+.js-cardcontainer2 div {
+  border-radius: 1em;
+}
+
+.heading-secondary {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #eee;
+  letter-spacing: 0.2rem;
+  line-height: 1;
+  transition: all 0.2s;
+}

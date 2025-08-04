@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body h1 {
+  font-family: "Luckiest Guy", cursive;
+  position: absolute;
+  margin-top: -15vh;
+  margin-left: 43vw;
+  font-size: 3em;
+}
+
+.gameboard {
+  display: grid;
+  margin-top: 25vh;
+  height: 75vh;
+  width: 100vw;
+  background-color: rgb(26, 156, 193);
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(33, 1fr);
+  gap: 1px;
+}
+
+.snakeTail {
+  background-color: rgb(1, 78, 1);
+  width: 1.5vw;
+}
+
+.snakeBody {
+  background-color: rgb(167, 142, 112);
+  width: 1.5vw;
+}
+
+.snakeHead {
+  background-color: black;
+  width: 1.5vw;
+}
+
+.food {
+  background-color: #f00;
+  border-radius: 15px;
+  width: 1.5vw;
+}
+
+.playagn {
+  width: 5vw;
+  height: 5vh;
+  margin-top: -82vh;
+  margin-left: 45vw;
+  position: absolute;
+  font-family: "Luckiest Guy", cursive;
+  border-radius: 10px;
+}

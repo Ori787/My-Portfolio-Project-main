@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern Tic-Tac-Toe game built with TypeScript">
+    <title>Tic-Tac-Toe - Modern Game</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header Section -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <span class="title-icon">🎮</span>
+                Tic-Tac-Toe
+            </h1>
+            <p class="game-subtitle">The classic game reimagined</p>
+        </header>
+
+        <!-- Game Info Section -->
+        <section class="game-info">
+            <div class="current-player player-x">
+                Current Player: X
+            </div>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Player X:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Player O:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Draws:</span>
+                    <span class="stat-value">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Board Section -->
+        <main class="game-board-container">
+            <div class="game-board">
+                <div class="game-cell" data-index="0" role="button" tabindex="0" aria-label="Cell 1"></div>
+                <div class="game-cell" data-index="1" role="button" tabindex="0" aria-label="Cell 2"></div>
+                <div class="game-cell" data-index="2" role="button" tabindex="0" aria-label="Cell 3"></div>
+                <div class="game-cell" data-index="3" role="button" tabindex="0" aria-label="Cell 4"></div>
+                <div class="game-cell" data-index="4" role="button" tabindex="0" aria-label="Cell 5"></div>
+                <div class="game-cell" data-index="5" role="button" tabindex="0" aria-label="Cell 6"></div>
+                <div class="game-cell" data-index="6" role="button" tabindex="0" aria-label="Cell 7"></div>
+                <div class="game-cell" data-index="7" role="button" tabindex="0" aria-label="Cell 8"></div>
+                <div class="game-cell" data-index="8" role="button" tabindex="0" aria-label="Cell 9"></div>
+            </div>
+        </main>
+
+        <!-- Game Controls Section -->
+        <section class="game-controls">
+            <button class="btn reset-btn" type="button">
+                <span class="btn-icon">🔄</span>
+                Reset Game
+            </button>
+            <button class="btn new-game-btn" type="button">
+                <span class="btn-icon">🎯</span>
+                New Game
+            </button>
+        </section>
+
+        <!-- Result Modal -->
+        <div class="result-modal" role="dialog" aria-labelledby="result-message" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="result-message" class="result-message">Game Result</h2>
+                    <button class="close-modal" type="button" aria-label="Close modal">
+                        <span class="close-icon">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="result-actions">
+                        <button class="btn btn-primary play-again-btn" type="button">
+                            <span class="btn-icon">🎮</span>
+                            Play Again
+                        </button>
+                        <button class="btn btn-secondary new-game-modal-btn" type="button">
+                            <span class="btn-icon">🎯</span>
+                            New Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Animation -->
+        <div class="background-animation">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/code.js"></script>
+</body>
+</html>

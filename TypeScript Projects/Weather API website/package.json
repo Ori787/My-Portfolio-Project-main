@@ -1,0 +1,19 @@
+{
+  "name": "weather-api-website",
+  "version": "1.0.0",
+  "description": "A modern weather application using the WeatherAPI",
+  "main": "js/code.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "npm run build && live-server --port=3000",
+    "start": "npm run build && live-server --port=3000"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "live-server": "^1.2.2"
+  }
+}

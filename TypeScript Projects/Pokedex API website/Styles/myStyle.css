@@ -1,0 +1,59 @@
+.searchbar {
+  width: 60vw;
+  height: 15vh;
+  background-color: rgb(174, 157, 5);
+  margin-left: 18vw;
+  opacity: 0.8;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  background-color: rgb(216, 13, 108);
+}
+
+.searchbar input {
+  height: 3vh;
+  width: 20vw;
+  margin-top: 9.5vh;
+  border-radius: 30px;
+}
+
+.searchbar h1 {
+  position: absolute;
+}
+
+.characterplace {
+  width: 50vw;
+  height: 40vh;
+  margin-left: 23vw;
+  margin-top: 20vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.characterplace h1 {
+  width: 15vw;
+  height: 5vh;
+  margin-top: -5vh;
+  margin-left: 8vw;
+}
+
+.characterplace img {
+  width: 15vw;
+  height: 15vh;
+  margin-top: 5vh;
+  position: absolute;
+  margin-left: -3vw;
+}
+
+.characterplace h2 {
+  width: 19vw;
+  height: 4vh;
+  position: absolute;
+  margin-top: 25vh;
+  margin-left: 7vw;
+}

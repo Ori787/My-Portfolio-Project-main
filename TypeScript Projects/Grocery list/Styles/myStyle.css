@@ -1,0 +1,91 @@
+body {
+  background: #12c2e9;
+  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+}
+
+.container {
+  width: 40vw;
+  margin-left: 44.5vw;
+  position: absolute;
+  margin-top: 25vh;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.container div {
+  width: 40vw;
+  height: 3vh;
+  background-color: rgb(112, 73, 49);
+  margin-left: 25vw;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container div p {
+  color: white;
+}
+
+.navbar {
+  position: fixed;
+   width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 29.5vw;
+  width: 40vw;
+  height: 6vh;
+  margin-top: 5vh;
+}
+
+.navbar img {
+  width: 4vw;
+  height: 3vh;
+}
+
+.container img {
+  margin-left: 30vw;
+  position: absolute;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  font-weight: bolder;
+}
+
+#myInput {
+  margin-left: 44.5vw;
+  position: absolute;
+  margin-top: 15vh;
+}
+
+.fav-list {
+  width: 40vw;
+  height: 50vh;
+  background-color: #1485f5;
+  margin-top: 25vh;
+  margin-left: 30vw;
+  border-radius: 10px;
+  display: none;
+}
+
+.question {
+  font-size: 1em;
+  position: absolute;
+  margin-top: 20vh;
+  margin-left: 37vw;
+  font-weight: 100;
+}
+
+.question img {
+  margin-left: 30vw;
+  position: absolute;
+  width: 1.5vw;
+}
+
+.fav-list li {
+  margin-left: 1vw;
+  margin-top: 0.4vh;
+  font-family: "Cormorant Garamond", serif;
+}
