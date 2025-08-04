@@ -4,7 +4,7 @@ interface NavigationState {
   currentSection: string;
 }
 
-export class App {
+class App {
   private state: NavigationState = {
     isMobileMenuOpen: false,
     currentSection: "main",

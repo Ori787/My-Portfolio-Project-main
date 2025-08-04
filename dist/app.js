@@ -1,4 +1,5 @@
-export class App {
+"use strict";
+class App {
     constructor() {
         this.state = {
             isMobileMenuOpen: false,
