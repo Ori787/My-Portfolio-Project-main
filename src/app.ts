@@ -166,10 +166,15 @@ class Carousel {
   }
 
   private updateCarousel(): void {
-    const slideWidth = 100 / 3; // Show 3 slides at once on desktop
+    // Get the actual width of a slide element
+    const slides = this.carousel.children;
+    if (slides.length === 0) return;
+    
+    const firstSlide = slides[0] as HTMLElement;
+    const slideWidth = firstSlide.offsetWidth;
     const translateX = -this.currentSlide * slideWidth;
     
-    this.carousel.style.transform = `translateX(${translateX}%)`;
+    this.carousel.style.transform = `translateX(${translateX}px)`;
     
     // Update dots
     this.dots.forEach((dot, index) => {
