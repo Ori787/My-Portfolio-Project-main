@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get real-time weather information for any city around the world">
+    <meta name="keywords" content="weather, forecast, temperature, humidity, wind">
+    <title>Weather API - Real-time Weather Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-400 via-blue-500 to-purple-600 min-h-screen font-inter">
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 relative">
+        <!-- Background Animation -->
+        <div class="fixed inset-0 z-0 overflow-hidden">
+            <div class="absolute w-32 h-32 top-10 left-10 rounded-full bg-white/10 animate-float"></div>
+            <div class="absolute w-24 h-24 top-20 right-10 rounded-full bg-white/10 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute w-40 h-40 bottom-20 left-20 rounded-full bg-white/10 animate-float" style="animation-delay: 4s;"></div>
+            <div class="absolute w-28 h-28 bottom-10 right-20 rounded-full bg-white/10 animate-float" style="animation-delay: 1s;"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="relative z-10 w-full max-w-2xl">
+            <!-- Header -->
+            <header class="text-center mb-12">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                    <span class="text-5xl md:text-6xl">🌤️</span>
+                    Weather App
+                </h1>
+                <p class="text-xl text-white/80 font-light">Get real-time weather information</p>
+            </header>
+
+            <!-- Search Section -->
+            <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl mb-8">
+                <div class="flex gap-4 mb-6">
+                    <input 
+                        type="text" 
+                        placeholder="Enter city name..." 
+                        class="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent text-lg"
+                        id="searchInput"
+                    >
+                    <button 
+                        class="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center gap-2"
+                        id="searchBtn"
+                    >
+                        <span class="text-xl">🔍</span>
+                        Search
+                    </button>
+                </div>
+                
+                <!-- Loading State -->
+                <div class="hidden loading-container text-center py-8">
+                    <div class="inline-block w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin-slow mb-4"></div>
+                    <p class="text-white/80 text-lg">Loading weather data...</p>
+                </div>
+
+                <!-- Error State -->
+                <div class="hidden error-container text-center py-8">
+                    <div class="text-6xl mb-4">⚠️</div>
+                    <p class="error-message text-white/90 text-lg mb-4">Error message will appear here</p>
+                    <button class="retry-btn px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105">
+                        Try Again
+                    </button>
+                </div>
+            </div>
+
+            <!-- Weather Display -->
+            <div class="weather-container hidden">
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl">
+                    <!-- Location Info -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 location-name">City Name</h2>
+                        <p class="text-xl text-white/80 location-country">Country</p>
+                        <p class="text-lg text-white/60 location-time">Local Time</p>
+                    </div>
+
+                    <!-- Current Weather -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Temperature -->
+                        <div class="text-center">
+                            <div class="text-6xl md:text-8xl font-bold text-white mb-4 temperature">--°C</div>
+                            <div class="text-2xl text-white/80 weather-condition">Weather Condition</div>
+                        </div>
+
+                        <!-- Weather Icon -->
+                        <div class="flex items-center justify-center">
+                            <div class="text-8xl md:text-9xl weather-icon">🌤️</div>
+                        </div>
+                    </div>
+
+                    <!-- Weather Details -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+                            <div class="text-2xl mb-2">💨</div>
+                            <div class="text-sm text-white/60 uppercase tracking-wider">Wind</div>
+                            <div class="text-lg font-semibold text-white wind-speed">-- km/h</div>
+                        </div>
+                        <div class="text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+                            <div class="text-2xl mb-2">💧</div>
+                            <div class="text-sm text-white/60 uppercase tracking-wider">Humidity</div>
+                            <div class="text-lg font-semibold text-white humidity">--%</div>
+                        </div>
+                        <div class="text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+                            <div class="text-2xl mb-2">👁️</div>
+                            <div class="text-sm text-white/60 uppercase tracking-wider">Visibility</div>
+                            <div class="text-lg font-semibold text-white visibility">-- km</div>
+                        </div>
+                        <div class="text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+                            <div class="text-2xl mb-2">🌡️</div>
+                            <div class="text-sm text-white/60 uppercase tracking-wider">Feels Like</div>
+                            <div class="text-lg font-semibold text-white feels-like">--°C</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/code.js"></script>
+</body>
+</html> 

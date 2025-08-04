@@ -1,0 +1,98 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 55vw;
+  height: 100vh;
+}
+
+.formbox {
+  width: 30vw;
+  height: 40vh;
+  margin-top: -77vh;
+  direction: rtl;
+  margin-left: 60vw;
+}
+
+.formbox input {
+  display: flex;
+  flex-direction: column;
+  height: 3.5vh;
+  width: 70%;
+  border-bottom: 3px inset #020253;
+  margin-top: 15px;
+  background-color: #e5eeff;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  margin-bottom: 3vh;
+}
+
+.formbox h1 {
+  color: #020253;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.formbox h2 {
+  font-weight: lighter;
+  color: #020253;
+  font-size: 1rem;
+}
+
+.formbox label {
+  color: #2c2c2c;
+  font-weight: bolder;
+}
+
+button {
+  margin-top: 3vh;
+  height: 5vh;
+  width: 8vw;
+  color: white;
+  background-color: #020253;
+  font-weight: bold;
+  border: none;
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  img {
+    width: 100vw;
+    height: 30vh;
+  }
+
+  .formbox {
+    position: absolute;
+    margin-right: 90vw;
+    margin-top: 30vh;
+  }
+
+  .formbox h1 {
+    margin-right: 15vw;
+    width: 70vw;
+    margin-top: -15vh;
+  }
+
+  .formbox h2 {
+    margin-right: 12.5vw;
+    width: 80vw;
+  }
+
+  .formbox label {
+    margin-right: 15vw;
+  }
+
+  .formbox input {
+    margin-right: 15vw;
+    width: 70vw;
+  }
+
+  .formbox button {
+    width: 70vw;
+    margin-right: 15vw;
+  }
+}

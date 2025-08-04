@@ -1,0 +1,19 @@
+{
+  "name": "weather-api-website",
+  "version": "1.0.0",
+  "description": "A modern weather application built with TypeScript and Tailwind CSS",
+  "main": "index.html",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc && live-server --port=3001",
+    "start": "live-server --port=3001"
+  },
+  "keywords": ["weather", "api", "typescript", "tailwind"],
+  "author": "Ori Hayat",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "live-server": "^1.2.2"
+  }
+} 

@@ -1,0 +1,19 @@
+{
+  "name": "xo-game",
+  "version": "1.0.0",
+  "description": "A modern Tic-Tac-Toe game built with TypeScript and Tailwind CSS",
+  "main": "index.html",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc && live-server --port=3000",
+    "start": "live-server --port=3000"
+  },
+  "keywords": ["game", "tic-tac-toe", "typescript", "tailwind"],
+  "author": "Ori Hayat",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "live-server": "^1.2.2"
+  }
+} 

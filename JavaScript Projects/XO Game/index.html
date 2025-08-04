@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern Tic-Tac-Toe game built with TypeScript">
+    <title>Tic-Tac-Toe - Modern Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        secondary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pop-in': 'popIn 0.3s ease-out',
+                        'spin-slow': 'spin 3s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-20px) rotate(120deg)' },
+                            '66%': { transform: 'translateY(10px) rotate(240deg)' },
+                        },
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+<body class="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 min-h-screen text-white font-inter">
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 relative z-10">
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 flex items-center justify-center gap-4">
+                <span class="text-5xl md:text-6xl">🎮</span>
+                Tic-Tac-Toe
+            </h1>
+            <p class="text-xl text-gray-200 font-light">The classic game reimagined</p>
+        </header>
+
+        <!-- Game Info Section -->
+        <section class="flex flex-col items-center gap-6 mb-12 w-full max-w-2xl">
+            <div class="text-2xl font-semibold px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all duration-300 shadow-lg player-x">
+                Current Player: X
+            </div>
+            <div class="flex gap-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+                <div class="flex flex-col items-center gap-2">
+                    <span class="text-sm text-gray-200 font-medium uppercase tracking-wider">Player X:</span>
+                    <span class="text-2xl font-bold text-white">0</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <span class="text-sm text-gray-200 font-medium uppercase tracking-wider">Player O:</span>
+                    <span class="text-2xl font-bold text-white">0</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <span class="text-sm text-gray-200 font-medium uppercase tracking-wider">Draws:</span>
+                    <span class="text-2xl font-bold text-white">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Board Section -->
+        <main class="mb-12">
+            <div class="grid grid-cols-3 gap-3 bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 shadow-2xl max-w-md w-full">
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="0" role="button" tabindex="0" aria-label="Cell 1"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="1" role="button" tabindex="0" aria-label="Cell 2"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="2" role="button" tabindex="0" aria-label="Cell 3"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="3" role="button" tabindex="0" aria-label="Cell 4"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="4" role="button" tabindex="0" aria-label="Cell 5"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="5" role="button" tabindex="0" aria-label="Cell 6"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="6" role="button" tabindex="0" aria-label="Cell 7"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="7" role="button" tabindex="0" aria-label="Cell 8"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="8" role="button" tabindex="0" aria-label="Cell 9"></div>
+            </div>
+        </main>
+
+        <!-- Game Controls Section -->
+        <section class="flex gap-4 flex-wrap justify-center">
+            <button class="flex items-center gap-2 px-6 py-3 border border-white/20 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl transition-all duration-300 hover:bg-white/15 hover:-translate-y-1 hover:shadow-lg reset-btn">
+                <span class="text-xl">🔄</span>
+                Reset Game
+            </button>
+            <button class="flex items-center gap-2 px-6 py-3 border border-white/20 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl transition-all duration-300 hover:bg-white/15 hover:-translate-y-1 hover:shadow-lg new-game-btn">
+                <span class="text-xl">🎯</span>
+                New Game
+            </button>
+        </section>
+
+        <!-- Result Modal -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300 result-modal" role="dialog" aria-labelledby="result-message" aria-hidden="true">
+            <div class="bg-white rounded-3xl p-8 max-w-md w-11/12 text-center shadow-2xl transform scale-90 transition-all duration-300">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="result-message" class="text-2xl font-bold text-gray-900">Game Result</h2>
+                    <button class="text-2xl cursor-pointer text-gray-500 hover:text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-150 close-modal" type="button" aria-label="Close modal">
+                        <span class="text-3xl">×</span>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <button class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg play-again-btn" type="button">
+                        <span class="text-xl">🎮</span>
+                        Play Again
+                    </button>
+                    <button class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg new-game-modal-btn" type="button">
+                        <span class="text-xl">🎯</span>
+                        New Game
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Animation -->
+        <div class="fixed inset-0 z-0 overflow-hidden">
+            <div class="absolute w-20 h-20 top-10 left-10 rounded-full bg-white/10 animate-float"></div>
+            <div class="absolute w-32 h-32 top-20 right-10 rounded-full bg-white/10 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute w-16 h-16 bottom-20 left-20 rounded-full bg-white/10 animate-float" style="animation-delay: 4s;"></div>
+            <div class="absolute w-24 h-24 bottom-10 right-20 rounded-full bg-white/10 animate-float" style="animation-delay: 1s;"></div>
+    </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/code.js"></script>
+  </body>
+</html>

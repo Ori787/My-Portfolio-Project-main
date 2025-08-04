@@ -1,0 +1,194 @@
+.upper-right-line {
+  height: 1vh;
+  width: 13.5vw;
+  background-color: #fdbd03;
+  margin-left: 86.5vw;
+}
+
+form {
+  direction: rtl;
+  width: 50vw;
+  margin-left: 10vw;
+}
+
+.formbox {
+  width: 40vw;
+  margin-left: 10vw;
+  margin-top: -5vh;
+}
+
+.phonebox {
+  height: 40vh;
+  width: 20vw;
+  display: flex;
+  margin-left: 75vw;
+  margin-top: -55vh;
+}
+
+.phonebox img {
+  width: 80vw;
+  height: 65vh;
+}
+
+.whatsappicon {
+  margin-left: 8vw;
+  margin-top: 8vh;
+}
+
+img[alt="whatsapp"] {
+  background-color: #fdbd03;
+  margin-left: -5vw;
+  border-radius: 45%;
+  margin-top: ;
+}
+
+.bottomicons {
+  margin-left: 0vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 30vw;
+  margin-top: 35vh;
+}
+
+.formbox h1 {
+  color: #fdbd03;
+  font-size: 2.7rem;
+  margin-left: 45.5vw;
+  width: 20vw;
+}
+
+.formbox h2 {
+  font-size: 1rem;
+  font-weight: lighter;
+  margin-left: 35.5vw;
+  width: 26vw;
+}
+
+input[name="fullname"] {
+  width: 22.5vw;
+  height: 3.5vh;
+  background-color: #e5eeff;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 3px inset #fdbd03;
+}
+
+input[name="email"] {
+  width: 23.15vw;
+  height: 3.5vh;
+  background-color: #e5eeff;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 3px inset #fdbd03;
+}
+
+input[name="fullname2"] {
+  width: 49vw;
+  height: 13vh;
+  background-color: #e5eeff;
+  margin-left: 15vw;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 3px inset #fdbd03;
+}
+
+button {
+  font-weight: bold;
+  margin-top: 4vh;
+  width: 7vw;
+  height: 4vh;
+  background-color: #fdbd03;
+  border: none;
+}
+
+.upperinputs {
+  display: flex;
+  width: 60vw;
+}
+
+.labelandinput1 {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  margin-left: 2vw;
+}
+
+.labelandinput2 {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  margin-bottom: 3vh;
+}
+
+label[for="fullname2"] {
+  height: 0.5vh;
+  width: 13vw;
+}
+
+.bottom-left-line {
+  height: 1vh;
+  width: 71vw;
+  background-color: #fdbd03;
+  margin-left: -1vw;
+  margin-top: 3.6vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .upper-right-line {
+    width: 95vw;
+    height: 2vh;
+    margin-left: -5vw;
+  }
+
+  .phonebox {
+    margin-left: -15vw;
+  }
+  .phonebox img {
+    width: 25vw;
+    height: 11vh;
+    margin-left: 50vw;
+    margin-top: -21.5vh;
+    position: absolute;
+  }
+  .bottomicons {
+    display: flex;
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 20vh;
+  }
+  .whatsappicon {
+    display: none;
+  }
+
+  .formbox div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formbox h1 {
+    margin-top: 20vh;
+    width: 70vw;
+    font-size: 2.2rem;
+    margin-left: 15vw;
+  }
+
+  .formbox h2 {
+    margin-bottom: 10vh;
+    width: 80vw;
+    margin-left: -4vw;
+  }
+
+  .formbox form input {
+    width: 80vw;
+    margin-right: -20vw;
+  }
+
+  form button {
+    width: 80vw;
+    margin-right: -19vw;
+  }
+}

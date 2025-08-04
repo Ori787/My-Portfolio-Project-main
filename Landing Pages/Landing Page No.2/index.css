@@ -1,0 +1,154 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(../../assets/letus2.jpg);
+  background-size: 100% 70vh;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+body h1 {
+  display: flex;
+  height: 10vh;
+  font-size: 2.8rem;
+  color: #d3e10e;
+  width: 45vw;
+  margin-left: 33.5vw;
+  margin-top: 25vh;
+  font-family: Assistant;
+}
+
+body h2 {
+  width: 75vw;
+  color: #f9f9f9;
+  font-size: 0.9rem;
+  font-weight: lighter;
+  display: flex;
+  flex-direction: row;
+  margin-left: 32.3vw;
+  margin-top: 5vh;
+}
+
+footer {
+  width: 100vw;
+  height: 30vh;
+  margin-top: 30vh;
+}
+
+.formbox {
+  width: 50%;
+  height: 40%;
+  margin-left: 34%;
+  margin-top: 35vh;
+  position: absolute;
+}
+
+.formbox form {
+  display: flex;
+}
+
+input {
+  width: 60vw;
+  margin-inline: 5vw;
+  background-color: #f6f6f6;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2.5px solid #d3e10e;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  width: 10vw;
+  height: 4.5vh;
+  color: #011560;
+  font-weight: bold;
+  background-color: #d3e10e;
+  border: none;
+  margin-top: 35.3vh;
+  margin-left: 23vw;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    background-image: url(../../assets/letus2.jpg);
+    background-size: 100% 40vh;
+    background-repeat: no-repeat;
+  }
+
+  body h1 {
+    font-size: 2rem;
+    color: #d3e10e;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-left: 12vw;
+    margin-top: 13vh;
+    width: 80vw;
+  }
+
+  body h2 {
+    font-size: 0.74rem;
+    font-weight: lighter;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 80vw;
+    margin-left: 13.8vw;
+    margin-top: 0.5vh;
+  }
+
+  .formbox {
+    width: 80%;
+    height: 25%;
+    margin-left: 10%;
+    margin-top: 25vh;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+  }
+
+  .formbox form {
+    display: flex;
+    margin-left: 10vh;
+    flex-direction: column;
+  }
+
+  input {
+    width: 60vw;
+    margin-inline: 5vw;
+    margin-top: 5vh;
+    margin-left: -12vw;
+    height: 4vh;
+    background-color: #e5eeff;
+  }
+
+  label {
+    display: flex;
+    flex-direction: row;
+    margin-top: -5vh;
+    margin-left: 37.5vw;
+  }
+
+  button {
+    width: 60vw;
+    height: 4vh;
+    color: #011560;
+    font-weight: bold;
+    background-color: #d3e10e;
+    border: none;
+    margin-left: 19.5vw;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 45vh;
+  }
+}
