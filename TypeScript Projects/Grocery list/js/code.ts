@@ -15,11 +15,12 @@ const loadSavedList = (): void => {
   if (savedList && container) {
     const parsedList: string[] = JSON.parse(savedList);
     listArr.push(...parsedList);
-    
+
     // Display saved items
     parsedList.forEach((item: string) => {
       const listItem = document.createElement("li");
-      listItem.className = "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300";
+      listItem.className =
+        "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300";
       listItem.textContent = item;
       container.appendChild(listItem);
     });
@@ -33,8 +34,8 @@ const addToArray = (): void => {
     if (inputValue !== "") {
       listArr.push(inputValue);
       myInput.value = ""; // Clear input after adding
+      console.log(listArr);
     }
-    console.log(listArr);
   });
 };
 
@@ -43,16 +44,20 @@ const addToList = (): void => {
   addBtn.addEventListener("click", () => {
     const inputValue = myInput.value.trim();
     if (inputValue !== "") {
+      listArr.push(inputValue);
+
       const newListColumn = document.createElement("li");
-      newListColumn.className = "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300 animate-pop-in";
+      newListColumn.className =
+        "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300 animate-pop-in";
       container.appendChild(newListColumn);
       newListColumn.textContent = inputValue;
-      
+
       // Save to localStorage
       const arrToString = JSON.stringify(listArr);
       localStorage.setItem("Current Array", arrToString);
-      
+
       myInput.value = ""; // Clear input after adding
+      console.log(listArr);
     }
   });
 };
@@ -68,11 +73,12 @@ const appendInFavDiv = (): void => {
 
       parsedlist.forEach((item: string) => {
         const listItem = document.createElement("li");
-        listItem.className = "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300";
+        listItem.className =
+          "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300";
         listItem.textContent = item;
         favDiv.appendChild(listItem);
       });
-      
+
       // Hide question after saving
       if (question) {
         question.classList.add("hidden");
@@ -102,7 +108,6 @@ const showMainList = (): void => {
 // Initialize when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   loadSavedList();
-  addToArray();
   addToList();
   appendInFavDiv();
   showFavList();

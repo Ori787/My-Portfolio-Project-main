@@ -105,18 +105,8 @@ class Carousel {
         this.initializeCarousel();
     }
     initializeCarousel() {
-        console.log("Initializing carousel:", this.carousel.id);
-        console.log("Prev button:", this.prevButton);
-        console.log("Next button:", this.nextButton);
-        console.log("Total slides:", this.totalSlides);
-        this.prevButton.addEventListener("click", () => {
-            console.log("Prev button clicked");
-            this.prevSlide();
-        });
-        this.nextButton.addEventListener("click", () => {
-            console.log("Next button clicked");
-            this.nextSlide();
-        });
+        this.prevButton.addEventListener("click", () => this.prevSlide());
+        this.nextButton.addEventListener("click", () => this.nextSlide());
         this.dots.forEach((dot, index) => {
             dot.addEventListener("click", () => this.goToSlide(index));
         });
@@ -148,12 +138,6 @@ class Carousel {
         const firstSlide = slides[0];
         const slideWidth = firstSlide.offsetWidth;
         const translateX = -this.currentSlide * slideWidth;
-        console.log("Carousel update:", {
-            currentSlide: this.currentSlide,
-            slideWidth,
-            translateX,
-            totalSlides: this.totalSlides,
-        });
         this.carousel.style.transform = `translateX(${translateX}px)`;
         // Update dots
         this.dots.forEach((dot, index) => {
