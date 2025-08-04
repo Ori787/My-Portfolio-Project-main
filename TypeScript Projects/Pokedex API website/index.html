@@ -4,20 +4,75 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./Styles/myStyle.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Pokédex - Pokémon Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    },
+                    animation: {
+                        'pop-in': 'popIn 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'bounce-slow': 'bounce 2s infinite'
+                    },
+                    keyframes: {
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body>
-    <div class="searchbar">
-      <h1>Pokedex</h1>
-      <input type="text" id="searchinput" />
+  <body class="bg-gradient-to-br from-red-500 via-red-600 to-red-700 min-h-screen font-inter text-white">
+    <!-- Background Animation -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
-    <div class="characterplace">
-      <h1 id="name"></h1>
-      <img src="" alt="profile-pic" id="pic" />
-      <h2 id="exp"></h2>
+
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+      <!-- Search Section -->
+      <div class="searchbar text-center mb-12">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8">Pokédex</h1>
+        <div class="relative max-w-md mx-auto">
+          <input 
+            type="text" 
+            id="searchinput" 
+            placeholder="Search for a Pokémon..."
+            class="w-full px-6 py-4 text-lg bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl text-white placeholder-white/70 focus:outline-none focus:border-white/50 focus:ring-4 focus:ring-white/20 transition-all duration-300"
+          />
+        </div>
+      </div>
+
+      <!-- Pokémon Display -->
+      <div id="characterplace" class="characterplace bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20 max-w-md w-full text-center animate-pop-in">
+        <h1 id="name" class="text-3xl font-bold mb-6 text-white"></h1>
+        <img src="" alt="Pokémon profile picture" id="pic" class="w-48 h-48 mx-auto mb-6 rounded-2xl bg-white/20 p-4" />
+        <h2 id="exp" class="text-xl text-white/80"></h2>
+      </div>
     </div>
+
     <script src="./script/code.js"></script>
   </body>
 </html>

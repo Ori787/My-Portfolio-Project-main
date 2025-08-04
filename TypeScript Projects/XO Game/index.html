@@ -5,87 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A modern Tic-Tac-Toe game built with TypeScript">
     <title>Tic-Tac-Toe - Modern Game</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    },
+                    animation: {
+                        'pop-in': 'popIn 0.3s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="game-container">
+<body class="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 min-h-screen text-white font-inter">
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 relative z-10">
         <!-- Header Section -->
-        <header class="game-header">
-            <h1 class="game-title">
-                <span class="title-icon">🎮</span>
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 flex items-center justify-center gap-4">
+                <span class="text-5xl md:text-6xl">🎮</span>
                 Tic-Tac-Toe
             </h1>
-            <p class="game-subtitle">The classic game reimagined</p>
+            <p class="text-xl text-gray-200 font-light">The classic game reimagined</p>
         </header>
 
         <!-- Game Info Section -->
-        <section class="game-info">
-            <div class="current-player player-x">
-                Current Player: X
-            </div>
-            <div class="game-stats">
-                <div class="stat-item">
-                    <span class="stat-label">Player X:</span>
-                    <span class="stat-value">0</span>
+        <section class="mb-8 text-center">
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 mb-6 shadow-xl">
+                <div class="text-2xl font-semibold mb-4" id="current-player">
+                    Current Player: <span class="text-blue-400">X</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-label">Player O:</span>
-                    <span class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Draws:</span>
-                    <span class="stat-value">0</span>
+                <div class="grid grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white/5 rounded-lg p-3">
+                        <div class="text-gray-300">Player X</div>
+                        <div class="text-2xl font-bold text-blue-400" id="score-x">0</div>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-3">
+                        <div class="text-gray-300">Player O</div>
+                        <div class="text-2xl font-bold text-orange-400" id="score-o">0</div>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-3">
+                        <div class="text-gray-300">Draws</div>
+                        <div class="text-2xl font-bold text-gray-400" id="score-draws">0</div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Game Board Section -->
-        <main class="game-board-container">
-            <div class="game-board">
-                <div class="game-cell" data-index="0" role="button" tabindex="0" aria-label="Cell 1"></div>
-                <div class="game-cell" data-index="1" role="button" tabindex="0" aria-label="Cell 2"></div>
-                <div class="game-cell" data-index="2" role="button" tabindex="0" aria-label="Cell 3"></div>
-                <div class="game-cell" data-index="3" role="button" tabindex="0" aria-label="Cell 4"></div>
-                <div class="game-cell" data-index="4" role="button" tabindex="0" aria-label="Cell 5"></div>
-                <div class="game-cell" data-index="5" role="button" tabindex="0" aria-label="Cell 6"></div>
-                <div class="game-cell" data-index="6" role="button" tabindex="0" aria-label="Cell 7"></div>
-                <div class="game-cell" data-index="7" role="button" tabindex="0" aria-label="Cell 8"></div>
-                <div class="game-cell" data-index="8" role="button" tabindex="0" aria-label="Cell 9"></div>
+        <main class="mb-8">
+            <div class="grid grid-cols-3 gap-4 w-80 h-80 md:w-96 md:h-96">
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="0" role="button" tabindex="0" aria-label="Cell 1"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="1" role="button" tabindex="0" aria-label="Cell 2"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="2" role="button" tabindex="0" aria-label="Cell 3"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="3" role="button" tabindex="0" aria-label="Cell 4"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="4" role="button" tabindex="0" aria-label="Cell 5"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="5" role="button" tabindex="0" aria-label="Cell 6"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="6" role="button" tabindex="0" aria-label="Cell 7"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="7" role="button" tabindex="0" aria-label="Cell 8"></div>
+                <div class="aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30" data-index="8" role="button" tabindex="0" aria-label="Cell 9"></div>
             </div>
         </main>
 
         <!-- Game Controls Section -->
-        <section class="game-controls">
-            <button class="btn reset-btn" type="button">
-                <span class="btn-icon">🔄</span>
+        <section class="flex gap-4 mb-8">
+            <button class="btn reset-btn bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30" type="button">
+                <span class="mr-2">🔄</span>
                 Reset Game
             </button>
-            <button class="btn new-game-btn" type="button">
-                <span class="btn-icon">🎯</span>
+            <button class="btn new-game-btn bg-blue-600 hover:bg-blue-700 border-2 border-blue-500 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/30" type="button">
+                <span class="mr-2">🎯</span>
                 New Game
             </button>
         </section>
 
         <!-- Result Modal -->
-        <div class="result-modal" role="dialog" aria-labelledby="result-message" aria-hidden="true">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="result-message" class="result-message">Game Result</h2>
-                    <button class="close-modal" type="button" aria-label="Close modal">
-                        <span class="close-icon">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="result-actions">
-                        <button class="btn btn-primary play-again-btn" type="button">
-                            <span class="btn-icon">🎮</span>
+        <div class="result-modal fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden" role="dialog" aria-labelledby="result-message" aria-hidden="true">
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl border border-white/20">
+                <div class="text-center">
+                    <h2 id="result-message" class="result-message text-3xl font-bold mb-6">Game Result</h2>
+                    <div class="flex gap-4 justify-center">
+                        <button class="btn btn-primary play-again-btn bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/30" type="button">
+                            <span class="mr-2">🎮</span>
                             Play Again
                         </button>
-                        <button class="btn btn-secondary new-game-modal-btn" type="button">
-                            <span class="btn-icon">🎯</span>
+                        <button class="btn btn-secondary new-game-modal-btn bg-gray-600 hover:bg-gray-700 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-400/30" type="button">
+                            <span class="mr-2">🎯</span>
                             New Game
                         </button>
                     </div>
@@ -94,11 +125,11 @@
         </div>
 
         <!-- Background Animation -->
-        <div class="background-animation">
-            <div class="floating-shape shape-1"></div>
-            <div class="floating-shape shape-2"></div>
-            <div class="floating-shape shape-3"></div>
-            <div class="floating-shape shape-4"></div>
+        <div class="fixed inset-0 pointer-events-none z-0">
+            <div class="floating-shape shape-1 absolute top-20 left-20 w-20 h-20 bg-white/5 rounded-full animate-float"></div>
+            <div class="floating-shape shape-2 absolute top-40 right-20 w-16 h-16 bg-white/5 rounded-full animate-float" style="animation-delay: -2s;"></div>
+            <div class="floating-shape shape-3 absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-float" style="animation-delay: -4s;"></div>
+            <div class="floating-shape shape-4 absolute bottom-40 right-1/4 w-24 h-24 bg-white/5 rounded-full animate-float" style="animation-delay: -1s;"></div>
         </div>
     </div>
 

@@ -3,8 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Geography Quiz Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'russo': ['Russo One', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    },
+                    animation: {
+                        'pop-in': 'popIn 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'bounce-slow': 'bounce 2s infinite'
+                    },
+                    keyframes: {
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,37 +46,60 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <h1>Geography Quiz Game</h1>
-    <div id="playground">
-      <h1 id="caption" style="color: white"></h1>
-      <div class="a1">
-        <button class="mybtn">1</button>
-        <h3 class="mytext"></h3>
-      </div>
-      <div class="a2">
-        <button class="mybtn">2</button>
-        <h3 class="mytext"></h3>
-      </div>
-      <div class="a3">
-        <button class="mybtn">3</button>
-        <h3 class="mytext"></h3>
-      </div>
-      <div class="a4">
-        <button class="mybtn">4</button>
-        <h3 class="mytext"></h3>
-      </div>
-      <div class="a5">
-        <button class="mybtn">5</button>
-        <h3 class="mytext"></h3>
-      </div>
-      <p>Play Again</p>
-      <button id="nextquestion">Next ==></button>
-      <h2 id="counterplace">1/25</h2>
+  <body class="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 min-h-screen font-russo text-white">
+    <!-- Background Animation -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
-    <button id="playagainbtn">
-      <img src="./earth.gif" alt="" />
-    </button>
+
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+      <!-- Header -->
+      <h1 class="text-4xl md:text-6xl font-bold text-center mb-8">Geography Quiz Game</h1>
+      
+      <!-- Quiz Container -->
+      <div id="playground" class="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20 max-w-2xl w-full">
+        <!-- Question -->
+        <h1 id="caption" class="text-2xl md:text-3xl font-bold text-center mb-8 text-white"></h1>
+        
+        <!-- Answer Options -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div class="a1">
+            <button class="mybtn w-full bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl p-4 text-lg font-semibold transition-all duration-300 hover:bg-white/30 hover:border-white/50 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/20">1</button>
+            <h3 class="mytext text-center mt-2 text-white/90"></h3>
+          </div>
+          <div class="a2">
+            <button class="mybtn w-full bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl p-4 text-lg font-semibold transition-all duration-300 hover:bg-white/30 hover:border-white/50 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/20">2</button>
+            <h3 class="mytext text-center mt-2 text-white/90"></h3>
+          </div>
+          <div class="a3">
+            <button class="mybtn w-full bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl p-4 text-lg font-semibold transition-all duration-300 hover:bg-white/30 hover:border-white/50 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/20">3</button>
+            <h3 class="mytext text-center mt-2 text-white/90"></h3>
+          </div>
+          <div class="a4">
+            <button class="mybtn w-full bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl p-4 text-lg font-semibold transition-all duration-300 hover:bg-white/30 hover:border-white/50 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/20">4</button>
+            <h3 class="mytext text-center mt-2 text-white/90"></h3>
+          </div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="flex items-center justify-between">
+          <p class="text-lg font-semibold">Play Again</p>
+          <button id="nextquestion" class="bg-blue-600 hover:bg-blue-700 border-2 border-blue-500 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/30">
+            Next ==>
+          </button>
+        </div>
+        
+        <!-- Counter -->
+        <h2 id="counterplace" class="text-center mt-4 text-xl font-bold">1/25</h2>
+      </div>
+      
+      <!-- Play Again Button -->
+      <button id="playagainbtn" class="mt-8 bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-full p-4 transition-all duration-300 hover:bg-white/30 hover:border-white/50 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/20">
+        <img src="./earth.gif" alt="Play Again" class="w-16 h-16 rounded-full" />
+      </button>
+    </div>
+
     <script type="module" src="./gamecode.js"></script>
   </body>
 </html>

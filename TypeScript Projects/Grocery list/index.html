@@ -4,8 +4,47 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./Styles/myStyle.css" />
+    <title>My Grocery List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cormorant': ['Cormorant Garamond', 'serif'],
+                        'russo': ['Russo One', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    },
+                    animation: {
+                        'pop-in': 'popIn 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.5s ease-out'
+                    },
+                    keyframes: {
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,23 +52,50 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <h1>My Grocery List</h1>
-    <div class="navbar">
-      <img src="./Assets/images/star.svg" alt="star" class="starimg" />
-      <img
-        src="./Assets/images/clipboard2-plus.svg"
-        alt="plus"
-        class="plusimg"
-      />
+  <body class="bg-gradient-to-br from-green-400 via-green-500 to-blue-600 min-h-screen font-cormorant text-white">
+    <!-- Background Animation -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
-    <input type="text" id="myInput" />
-    <div class="fav-list"></div>
-    <h1 class="question">
-      <img src="./Assets/images/send-check.svg" alt="check" class="checkimg" />
-      Do you want to save the current list to your favourites?
-    </h1>
-    <div class="container"></div>
+
+    <div class="relative z-10 min-h-screen p-8">
+      <!-- Header -->
+      <h1 class="text-4xl md:text-6xl font-bold text-center mb-8 font-russo">My Grocery List</h1>
+      
+      <!-- Navigation Bar -->
+      <div class="navbar flex justify-center mb-8">
+        <img src="./Assets/images/star.svg" alt="star" class="starimg w-8 h-8 mr-4 cursor-pointer hover:scale-110 transition-transform" />
+        <img
+          src="./Assets/images/clipboard2-plus.svg"
+          alt="plus"
+          class="plusimg w-8 h-8 cursor-pointer hover:scale-110 transition-transform"
+        />
+      </div>
+
+      <!-- Input Section -->
+      <div class="max-w-md mx-auto mb-8">
+        <input 
+          type="text" 
+          id="myInput" 
+          placeholder="Add item to your grocery list..."
+          class="w-full px-6 py-4 text-lg bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl text-white placeholder-white/70 focus:outline-none focus:border-white/50 focus:ring-4 focus:ring-white/20 transition-all duration-300"
+        />
+      </div>
+
+      <!-- Favorites List -->
+      <div class="fav-list max-w-md mx-auto mb-8"></div>
+
+      <!-- Save Question -->
+      <h1 class="question text-center text-xl mb-8 hidden">
+        <img src="./Assets/images/send-check.svg" alt="check" class="checkimg w-6 h-6 inline mr-2" />
+        Do you want to save the current list to your favourites?
+      </h1>
+
+      <!-- Main Container -->
+      <div class="container max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20"></div>
+    </div>
+
     <script src="./js/code.js"></script>
   </body>
 </html>

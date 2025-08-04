@@ -1,15 +1,18 @@
-import axios from "axios";
-
 interface WeatherResponse {
   current: {
     temp_c: number;
+    feelslike_c: number;
     condition: {
       text: string;
+      icon: string;
     };
     humidity: number;
+    wind_kph: number;
+    vis_km: number;
   };
   location: {
     name: string;
+    country: string;
   };
 }
 
@@ -22,27 +25,31 @@ interface WeatherError {
 
 // Configuration - In production, use environment variables
 const API_KEY = "c5fa44a43739451b96190228231109"; // Consider moving to environment variable
-const DEFAULT_LOCATION = "Rishon Lezion";
 const API_BASE_URL = "https://api.weatherapi.com/v1";
 
 // DOM elements
-const apiPlace = document.querySelector(".api-place") as HTMLElement | null;
-const searchInput = document.querySelector(
-  "#searchinput"
-) as HTMLInputElement | null;
+const searchInput = document.getElementById("searchinput") as HTMLInputElement;
+const searchButton = document.getElementById("search-button") as HTMLElement;
+const weatherContainer = document.getElementById(
+  "weather-container"
+) as HTMLElement;
+const loadingElement = document.getElementById("loading") as HTMLElement;
+const errorElement = document.getElementById("error") as HTMLElement;
+const errorMessage = document.getElementById("error-message") as HTMLElement;
 
 // Weather display elements
 const elements = {
-  city: apiPlace?.querySelector(".weather-header h1") as HTMLElement | null,
-  temperature: apiPlace?.querySelector(
-    ".weather-header h2"
-  ) as HTMLElement | null,
-  condition: apiPlace?.querySelector(
-    ".weather-detail:first-child h3"
-  ) as HTMLElement | null,
-  humidity: apiPlace?.querySelector(
-    ".weather-detail:last-child h4"
-  ) as HTMLElement | null,
+  cityName: document.getElementById("city-name") as HTMLElement,
+  countryName: document.getElementById("country-name") as HTMLElement,
+  weatherIcon: document.getElementById("weather-icon") as HTMLImageElement,
+  temperature: document.getElementById("temperature") as HTMLElement,
+  weatherDescription: document.getElementById(
+    "weather-description"
+  ) as HTMLElement,
+  feelsLike: document.getElementById("feels-like") as HTMLElement,
+  humidity: document.getElementById("humidity") as HTMLElement,
+  windSpeed: document.getElementById("wind-speed") as HTMLElement,
+  visibility: document.getElementById("visibility") as HTMLElement,
 };
 
 /**
@@ -50,14 +57,61 @@ const elements = {
  */
 function validateElements(): boolean {
   const requiredElements = [
-    apiPlace,
-    elements.city,
-    elements.temperature,
-    elements.condition,
-    elements.humidity,
+    searchInput,
+    weatherContainer,
+    loadingElement,
+    errorElement,
+    ...Object.values(elements),
   ];
 
   return requiredElements.every((element) => element !== null);
+}
+
+/**
+ * Shows loading state
+ */
+function showLoading(): void {
+  if (loadingElement) {
+    loadingElement.classList.remove("hidden");
+  }
+  if (errorElement) {
+    errorElement.classList.add("hidden");
+  }
+  if (weatherContainer) {
+    weatherContainer.classList.add("hidden");
+  }
+}
+
+/**
+ * Hides loading state
+ */
+function hideLoading(): void {
+  if (loadingElement) {
+    loadingElement.classList.add("hidden");
+  }
+}
+
+/**
+ * Shows error message
+ */
+function showError(message: string): void {
+  hideLoading();
+  if (errorElement && errorMessage) {
+    errorMessage.textContent = message;
+    errorElement.classList.remove("hidden");
+  }
+  if (weatherContainer) {
+    weatherContainer.classList.add("hidden");
+  }
+}
+
+/**
+ * Hides error message
+ */
+function hideError(): void {
+  if (errorElement) {
+    errorElement.classList.add("hidden");
+  }
 }
 
 /**
@@ -69,166 +123,99 @@ function updateUI(data: WeatherResponse): void {
     return;
   }
 
-  // Update weather information
-  elements.city!.innerText = data.location.name;
-  elements.temperature!.innerText = `${data.current.temp_c}°C`;
-  elements.condition!.innerText = data.current.condition.text;
-  elements.humidity!.innerText = `${data.current.humidity}%`;
+  hideLoading();
+  hideError();
 
-  // Change temperature color based on value
-  elements.temperature!.style.color =
-    data.current.temp_c >= 27 ? "#ff6b6b" : "#51cf66";
+  // Update location information
+  elements.cityName.textContent = data.location.name;
+  elements.countryName.textContent = data.location.country;
 
-  // Update background based on weather condition
-  updateBackground(data.current.condition.text);
+  // Update weather icon
+  elements.weatherIcon.src = `https:${data.current.condition.icon}`;
+  elements.weatherIcon.alt = data.current.condition.text;
+
+  // Update temperature and description
+  elements.temperature.textContent = `${Math.round(data.current.temp_c)}°C`;
+  elements.weatherDescription.textContent = data.current.condition.text;
+
+  // Update weather details
+  elements.feelsLike.textContent = `${Math.round(data.current.feelslike_c)}°C`;
+  elements.humidity.textContent = `${data.current.humidity}%`;
+  elements.windSpeed.textContent = `${data.current.wind_kph} km/h`;
+  elements.visibility.textContent = `${data.current.vis_km} km`;
+
+  // Show weather container with animation
+  weatherContainer.classList.remove("hidden");
+  weatherContainer.classList.add("animate-pop-in");
 }
 
 /**
- * Updates the background based on weather condition
- */
-function updateBackground(condition: string): void {
-  const body = document.body;
-  body.className = ""; // Clear existing classes
-
-  const conditionLower = condition.toLowerCase();
-
-  if (conditionLower.includes("sun") || conditionLower.includes("clear")) {
-    body.classList.add("sunny");
-  } else if (conditionLower.includes("cloud")) {
-    body.classList.add("cloudy");
-  } else if (
-    conditionLower.includes("rain") ||
-    conditionLower.includes("drizzle")
-  ) {
-    body.classList.add("rainy");
-  } else if (conditionLower.includes("snow")) {
-    body.classList.add("snowy");
-  } else if (
-    conditionLower.includes("fog") ||
-    conditionLower.includes("mist")
-  ) {
-    body.classList.add("foggy");
-  }
-}
-
-/**
- * Shows error message in the UI
- */
-function showError(message: string): void {
-  if (!apiPlace) return;
-
-  apiPlace.innerHTML = `
-    <div class="error-container">
-      <div class="error-icon">⚠️</div>
-      <p class="error-message">${message}</p>
-      <button class="retry-btn" onclick="location.reload()">Try Again</button>
-    </div>
-  `;
-}
-
-/**
- * Shows loading state
- */
-function showLoading(): void {
-  if (!apiPlace) return;
-
-  apiPlace.innerHTML = `
-    <div class="loading-container">
-      <div class="loading-spinner"></div>
-      <p>Loading weather data...</p>
-    </div>
-  `;
-}
-
-/**
- * Fetches and displays weather data for the specified location
+ * Fetches weather data from the API
  */
 async function fetchWeather(location: string): Promise<void> {
-  if (!apiPlace) {
-    console.error("Weather container not found");
-    return;
-  }
-
-  showLoading();
-
   try {
-    const url = `${API_BASE_URL}/current.json?key=${API_KEY}&q=${encodeURIComponent(
-      location
-    )}&aqi=no`;
-    const response = await axios.get<WeatherResponse>(url);
+    showLoading();
 
-    updateUI(response.data);
-  } catch (error) {
-    console.error("Weather data fetch failed:", error);
+    const response = await fetch(
+      `${API_BASE_URL}/current.json?key=${API_KEY}&q=${encodeURIComponent(
+        location
+      )}&aqi=no`
+    );
 
-    let errorMessage = "Failed to load weather data. Please try again.";
-
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 400) {
-        errorMessage =
-          "City not found. Please check the spelling and try again.";
-      } else if (error.response?.status === 401) {
-        errorMessage = "API key error. Please contact support.";
-      } else if (error.response?.status === 429) {
-        errorMessage = "Too many requests. Please wait a moment and try again.";
-      } else if (error.code === "NETWORK_ERROR") {
-        errorMessage = "Network error. Please check your internet connection.";
-      }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    const data: WeatherResponse | WeatherError = await response.json();
+
+    if ("error" in data) {
+      throw new Error(data.error.message);
+    }
+
+    updateUI(data);
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to fetch weather data";
     showError(errorMessage);
   }
 }
 
 /**
- * Handles search input
+ * Handles search functionality
  */
 function handleSearch(): void {
-  if (!searchInput) return;
-
   const location = searchInput.value.trim();
-  if (location) {
-    fetchWeather(location);
+
+  if (!location) {
+    showError("Please enter a city name");
+    return;
   }
+
+  fetchWeather(location);
 }
 
 /**
  * Initializes the application
  */
 function init(): void {
-  // Validate DOM elements
   if (!validateElements()) {
-    console.error("Required DOM elements not found. Check HTML structure.");
+    console.error("Required DOM elements not found");
     return;
   }
 
-  // Initial fetch
-  fetchWeather(DEFAULT_LOCATION);
+  // Add event listeners
+  searchButton.addEventListener("click", handleSearch);
 
-  // Setup search functionality
-  if (searchInput) {
-    // Handle Enter key
-    searchInput.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        handleSearch();
-      }
-    });
-
-    // Handle search icon click (if you want to add this functionality)
-    const searchIcon = document.querySelector(".searchimg");
-    if (searchIcon) {
-      searchIcon.addEventListener("click", handleSearch);
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
-  }
+  });
 
-  // Add some helpful console info
-  console.log("Weather App initialized successfully!");
+  // Focus on search input
+  searchInput.focus();
 }
 
-// Start the app when DOM is loaded
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
+// Initialize when DOM is loaded
+document.addEventListener("DOMContentLoaded", init);

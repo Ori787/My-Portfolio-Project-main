@@ -203,9 +203,14 @@ class TicTacToeGame {
     ) as HTMLElement;
     if (cell) {
       cell.textContent = this.board[index];
-      cell.className = "game-cell";
+      cell.className =
+        "aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30";
       if (this.board[index]) {
-        cell.classList.add(`player-${this.board[index].toLowerCase()}`);
+        if (this.board[index] === "X") {
+          cell.classList.add("text-blue-400", "animate-pop-in");
+        } else {
+          cell.classList.add("text-orange-400", "animate-pop-in");
+        }
       }
     }
   }
@@ -218,9 +223,14 @@ class TicTacToeGame {
       ) as HTMLElement;
       if (cell) {
         cell.textContent = value;
-        cell.className = "game-cell";
+        cell.className =
+          "aspect-square bg-white/5 border-2 border-white/10 rounded-2xl flex items-center justify-center text-5xl font-bold cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-400/30";
         if (value) {
-          cell.classList.add(`player-${value.toLowerCase()}`);
+          if (value === "X") {
+            cell.classList.add("text-blue-400", "animate-pop-in");
+          } else {
+            cell.classList.add("text-orange-400", "animate-pop-in");
+          }
         }
       }
     });
@@ -229,33 +239,22 @@ class TicTacToeGame {
   }
 
   private updateCurrentPlayerDisplay(): void {
-    const currentPlayerElement = document.querySelector(
-      ".current-player"
-    ) as HTMLElement;
+    const currentPlayerElement = document.getElementById("current-player");
     if (currentPlayerElement) {
-      currentPlayerElement.textContent = `Current Player: ${this.currentPlayer}`;
-      currentPlayerElement.className = `current-player player-${this.currentPlayer.toLowerCase()}`;
+      currentPlayerElement.innerHTML = `Current Player: <span class="${
+        this.currentPlayer === "X" ? "text-blue-400" : "text-orange-400"
+      }">${this.currentPlayer}</span>`;
     }
   }
 
   private updateStats(): void {
-    const statsElement = document.querySelector(".game-stats") as HTMLElement;
-    if (statsElement) {
-      statsElement.innerHTML = `
-        <div class="stat-item">
-          <span class="stat-label">Player X:</span>
-          <span class="stat-value">${this.stats.X}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Player O:</span>
-          <span class="stat-value">${this.stats.O}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Draws:</span>
-          <span class="stat-value">${this.stats.draws}</span>
-        </div>
-      `;
-    }
+    const xScore = document.getElementById("score-x");
+    const oScore = document.getElementById("score-o");
+    const drawsScore = document.getElementById("score-draws");
+
+    if (xScore) xScore.textContent = this.stats.X.toString();
+    if (oScore) oScore.textContent = this.stats.O.toString();
+    if (drawsScore) drawsScore.textContent = this.stats.draws.toString();
   }
 
   private showGameResult(message: string): void {
@@ -266,7 +265,7 @@ class TicTacToeGame {
 
     if (resultModal && resultMessage) {
       resultMessage.textContent = message;
-      resultModal.classList.add("show");
+      resultModal.classList.remove("hidden");
       resultModal.setAttribute("aria-hidden", "false");
 
       // Focus the first button in the modal for accessibility
@@ -282,7 +281,7 @@ class TicTacToeGame {
   private hideGameResult(): void {
     const resultModal = document.querySelector(".result-modal") as HTMLElement;
     if (resultModal) {
-      resultModal.classList.remove("show");
+      resultModal.classList.add("hidden");
       resultModal.setAttribute("aria-hidden", "true");
     }
   }
