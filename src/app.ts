@@ -141,12 +141,35 @@ class Carousel {
     this.dots = document.querySelectorAll(dotsClass);
     this.totalSlides = this.dots.length;
 
+    // Debug logging
+    console.log(`Initializing carousel: ${carouselId}`);
+    console.log("Carousel element:", this.carousel);
+    console.log("Prev button:", this.prevButton);
+    console.log("Next button:", this.nextButton);
+    console.log("Dots found:", this.dots.length);
+    console.log("Total slides:", this.totalSlides);
+
+    if (!this.carousel || !this.prevButton || !this.nextButton) {
+      console.error(
+        `Failed to initialize carousel ${carouselId}: Missing elements`
+      );
+      return;
+    }
+
     this.initializeCarousel();
   }
 
   private initializeCarousel(): void {
-    this.prevButton.addEventListener("click", () => this.prevSlide());
-    this.nextButton.addEventListener("click", () => this.nextSlide());
+    console.log("Setting up event listeners for carousel");
+
+    this.prevButton.addEventListener("click", () => {
+      console.log("Prev button clicked");
+      this.prevSlide();
+    });
+    this.nextButton.addEventListener("click", () => {
+      console.log("Next button clicked");
+      this.nextSlide();
+    });
 
     this.dots.forEach((dot, index) => {
       dot.addEventListener("click", () => this.goToSlide(index));
@@ -186,6 +209,15 @@ class Carousel {
     const slideWidth = firstSlide.offsetWidth;
     const translateX = -this.currentSlide * slideWidth;
 
+    console.log("Updating carousel:", {
+      currentSlide: this.currentSlide,
+      slideWidth,
+      translateX,
+      totalSlides: this.totalSlides,
+      carouselWidth: this.carousel.offsetWidth,
+      firstSlideWidth: firstSlide.offsetWidth
+    });
+
     this.carousel.style.transform = `translateX(${translateX}px)`;
 
     // Update dots
@@ -203,9 +235,11 @@ class Carousel {
 
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM loaded, initializing app...");
   new App();
 
   // Initialize carousels
+  console.log("Initializing carousels...");
   new Carousel(
     "landing-carousel",
     "landing-prev",

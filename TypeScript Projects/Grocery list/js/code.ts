@@ -94,15 +94,19 @@ const showFavList = (): void => {
     container.style.display = "none";
     question.style.display = "none";
   });
+
+  // Add click handler to switch back to main list
+  addBtn?.addEventListener("click", () => {
+    showMainList();
+  });
 };
 
 const showMainList = (): void => {
-  if (!addBtn || !favDiv || !container || !question) return;
-  addBtn.addEventListener("click", () => {
-    favDiv.style.display = "none";
-    container.style.display = "block";
-    question.style.display = "block";
-  });
+  if (!favDiv || !container || !question) return;
+  // This function will be called from other places, not as an event listener
+  favDiv.style.display = "none";
+  container.style.display = "block";
+  question.style.display = "block";
 };
 
 // Initialize when DOM is loaded
