@@ -4,9 +4,10 @@
   "description": "Portfolio project with Tailwind CSS",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build:prod": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
-    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch & tsc --watch",
+    "build:prod": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify && tsc",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch & tsc --watch",
+    "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -19,6 +20,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2"
   }
 }
