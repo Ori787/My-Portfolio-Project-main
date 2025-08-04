@@ -129,7 +129,12 @@ class Carousel {
   private currentSlide: number = 0;
   private totalSlides: number;
 
-  constructor(carouselId: string, prevId: string, nextId: string, dotsClass: string) {
+  constructor(
+    carouselId: string,
+    prevId: string,
+    nextId: string,
+    dotsClass: string
+  ) {
     this.carousel = document.getElementById(carouselId) as HTMLElement;
     this.prevButton = document.getElementById(prevId) as HTMLElement;
     this.nextButton = document.getElementById(nextId) as HTMLElement;
@@ -142,21 +147,28 @@ class Carousel {
   private initializeCarousel(): void {
     this.prevButton.addEventListener("click", () => this.prevSlide());
     this.nextButton.addEventListener("click", () => this.nextSlide());
-    
+
     this.dots.forEach((dot, index) => {
       dot.addEventListener("click", () => this.goToSlide(index));
+    });
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      this.updateCarousel();
     });
 
     this.updateCarousel();
   }
 
   private prevSlide(): void {
-    this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+    this.currentSlide =
+      this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
     this.updateCarousel();
   }
 
   private nextSlide(): void {
-    this.currentSlide = this.currentSlide === this.totalSlides - 1 ? 0 : this.currentSlide + 1;
+    this.currentSlide =
+      this.currentSlide === this.totalSlides - 1 ? 0 : this.currentSlide + 1;
     this.updateCarousel();
   }
 
@@ -169,13 +181,13 @@ class Carousel {
     // Get the actual width of a slide element
     const slides = this.carousel.children;
     if (slides.length === 0) return;
-    
+
     const firstSlide = slides[0] as HTMLElement;
     const slideWidth = firstSlide.offsetWidth;
     const translateX = -this.currentSlide * slideWidth;
-    
+
     this.carousel.style.transform = `translateX(${translateX}px)`;
-    
+
     // Update dots
     this.dots.forEach((dot, index) => {
       if (index === this.currentSlide) {
@@ -192,8 +204,18 @@ class Carousel {
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   new App();
-  
+
   // Initialize carousels
-  new Carousel("landing-carousel", "landing-prev", "landing-next", ".landing-dot");
-  new Carousel("typescript-carousel", "typescript-prev", "typescript-next", ".typescript-dot");
+  new Carousel(
+    "landing-carousel",
+    "landing-prev",
+    "landing-next",
+    ".landing-dot"
+  );
+  new Carousel(
+    "typescript-carousel",
+    "typescript-prev",
+    "typescript-next",
+    ".typescript-dot"
+  );
 });

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Ori Hayat's Portfolio - Full Stack Developer">
     <meta name="keywords" content="portfolio, developer, web development, JavaScript, TypeScript, React">
     <meta name="theme-color" content="#1e40af">
@@ -76,6 +76,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="./assets/optimized/Profile_Pic.jpg">
+    <link rel="preload" as="image" href="./assets/optimized/Landing1-thumbnail.jpg">
+    <link rel="preload" as="image" href="./assets/optimized/landing2-thumbnail.jpg">
+    <link rel="preload" as="image" href="./assets/optimized/Landing3-thumbnail.jpg">
+    <link rel="preload" as="image" href="./assets/optimized/landing4-thumbnail.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
         /* Custom styles for navigation */
@@ -86,6 +90,25 @@
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
+        }
+        
+        /* Prevent mobile zoom issues */
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Allow text selection in specific areas */
+        input, textarea, [contenteditable] {
+            -webkit-user-select: text;
+            -khtml-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
         }
         
         /* Custom scrollbar */

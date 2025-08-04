@@ -110,14 +110,20 @@ class Carousel {
         this.dots.forEach((dot, index) => {
             dot.addEventListener("click", () => this.goToSlide(index));
         });
+        // Handle window resize
+        window.addEventListener("resize", () => {
+            this.updateCarousel();
+        });
         this.updateCarousel();
     }
     prevSlide() {
-        this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+        this.currentSlide =
+            this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
         this.updateCarousel();
     }
     nextSlide() {
-        this.currentSlide = this.currentSlide === this.totalSlides - 1 ? 0 : this.currentSlide + 1;
+        this.currentSlide =
+            this.currentSlide === this.totalSlides - 1 ? 0 : this.currentSlide + 1;
         this.updateCarousel();
     }
     goToSlide(slideIndex) {
