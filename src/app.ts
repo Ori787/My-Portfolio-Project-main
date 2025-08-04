@@ -191,6 +191,10 @@ class Carousel {
     const slideWidth = 352;
     const translateX = -this.currentSlide * slideWidth;
 
+    console.log(
+      `Moving carousel to slide ${this.currentSlide}, translateX: ${translateX}px`
+    );
+
     this.carousel.style.transform = `translateX(${translateX}px)`;
 
     // Update dots
@@ -210,13 +214,16 @@ class Carousel {
 document.addEventListener("DOMContentLoaded", () => {
   new App();
 
-  new Carousel(
+  console.log("Initializing Landing Pages carousel...");
+  const landingCarousel = new Carousel(
     "landing-carousel",
     "landing-prev",
     "landing-next",
     ".landing-dot"
   );
-  new Carousel(
+
+  console.log("Initializing TypeScript Projects carousel...");
+  const typescriptCarousel = new Carousel(
     "typescript-carousel",
     "typescript-prev",
     "typescript-next",

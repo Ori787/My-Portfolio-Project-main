@@ -140,6 +140,7 @@ class Carousel {
         // Fixed slide width: w-80 (320px) + px-4 (16px * 2) = 352px
         const slideWidth = 352;
         const translateX = -this.currentSlide * slideWidth;
+        console.log(`Moving carousel to slide ${this.currentSlide}, translateX: ${translateX}px`);
         this.carousel.style.transform = `translateX(${translateX}px)`;
         // Update dots
         this.dots.forEach((dot, index) => {
@@ -157,7 +158,9 @@ class Carousel {
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     new App();
-    new Carousel("landing-carousel", "landing-prev", "landing-next", ".landing-dot");
-    new Carousel("typescript-carousel", "typescript-prev", "typescript-next", ".typescript-dot");
+    console.log("Initializing Landing Pages carousel...");
+    const landingCarousel = new Carousel("landing-carousel", "landing-prev", "landing-next", ".landing-dot");
+    console.log("Initializing TypeScript Projects carousel...");
+    const typescriptCarousel = new Carousel("typescript-carousel", "typescript-prev", "typescript-next", ".typescript-dot");
 });
 //# sourceMappingURL=app.js.map
