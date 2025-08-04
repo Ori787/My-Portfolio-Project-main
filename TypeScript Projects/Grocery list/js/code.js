@@ -1,0 +1,101 @@
+"use strict";
+// Grocery List functionality
+const favBtn = document.querySelector(".starimg");
+const addBtn = document.querySelector(".plusimg");
+const myInput = document.querySelector("#myInput");
+const container = document.querySelector(".container");
+const favDiv = document.querySelector(".fav-list");
+const check = document.querySelector(".checkimg");
+const question = document.querySelector(".question");
+const listArr = [];
+// Load saved list from localStorage on page load
+const loadSavedList = () => {
+    const savedList = localStorage.getItem("Current Array");
+    if (savedList && container) {
+        const parsedList = JSON.parse(savedList);
+        listArr.push(...parsedList);
+        // Display saved items
+        parsedList.forEach((item) => {
+            const listItem = document.createElement("li");
+            listItem.className =
+                "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300";
+            listItem.textContent = item;
+            container.appendChild(listItem);
+        });
+    }
+};
+const addToList = () => {
+    if (!addBtn || !myInput || !container)
+        return;
+    addBtn.addEventListener("click", () => {
+        const inputValue = myInput.value.trim();
+        if (inputValue !== "") {
+            listArr.push(inputValue);
+            const newListColumn = document.createElement("li");
+            newListColumn.className =
+                "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300 animate-pop-in";
+            container.appendChild(newListColumn);
+            newListColumn.textContent = inputValue;
+            // Save to localStorage
+            const arrToString = JSON.stringify(listArr);
+            localStorage.setItem("Current Array", arrToString);
+            myInput.value = ""; // Clear input after adding
+            console.log(listArr);
+        }
+    });
+};
+const appendInFavDiv = () => {
+    if (!check || !favDiv)
+        return;
+    check.addEventListener("click", () => {
+        const myFavList = localStorage.getItem("Current Array");
+        if (myFavList) {
+            const parsedlist = JSON.parse(myFavList);
+            favDiv.innerHTML = "";
+            parsedlist.forEach((item) => {
+                const listItem = document.createElement("li");
+                listItem.className =
+                    "bg-white/10 backdrop-blur-md rounded-xl p-4 mb-3 text-white border border-white/20 hover:bg-white/20 transition-all duration-300";
+                listItem.textContent = item;
+                favDiv.appendChild(listItem);
+            });
+            // Hide question after saving
+            if (question) {
+                question.classList.add("hidden");
+            }
+        }
+    });
+};
+const showFavList = () => {
+    if (!favBtn || !favDiv || !container || !question)
+        return;
+    favBtn.addEventListener("click", () => {
+        favDiv.style.display = "block";
+        container.style.display = "none";
+        question.style.display = "none";
+    });
+};
+const showMainList = () => {
+    if (!favDiv || !container || !question)
+        return;
+    // This function will be called from other places, not as an event listener
+    favDiv.style.display = "none";
+    container.style.display = "block";
+    question.style.display = "block";
+};
+const setupMainListSwitch = () => {
+    if (!addBtn)
+        return;
+    addBtn.addEventListener("click", () => {
+        showMainList();
+    });
+};
+// Initialize when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    loadSavedList();
+    addToList();
+    appendInFavDiv();
+    showFavList();
+    setupMainListSwitch();
+});
+//# sourceMappingURL=code.js.map

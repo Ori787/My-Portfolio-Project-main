@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./script",
+    "rootDir": "./script",
+    "sourceMap": true,
+    "declaration": false,
+    "allowJs": true,
+    "checkJs": false,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+  },
+  "include": ["script/**/*"],
+  "exclude": ["node_modules"]
+} 
